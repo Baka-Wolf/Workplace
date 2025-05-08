@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>点位生成器</title>
+</head>
+<body>
+    <h1>点位生成器</h1>
+    <label>横轴范围:</label>
+    <input type="number" id="xRange" placeholder="输入横轴范围"><br><br>
+    <label>纵轴范围:</label>
+    <input type="number" id="yRange" placeholder="输入纵轴范围"><br><br>
+    <label>不可用点位 (格式: x,y; x,y):</label>
+    <input type="text" id="unavailablePoints" placeholder="例如: 3,5; 7,8"><br><br>
+    <button onclick="generatePoints()">生成点位</button>
+    <p id="output"></p>
+
+    <script>
+        function generatePoints() {
+            const xRange = parseInt(document.getElementById("xRange").value);
+            const yRange = parseInt(document.getElementById("yRange").value);
+            const unavailablePointsInput = document.getElementById("unavailablePoints").value;
+            
+            const unavailablePoints = unavailablePointsInput.split(";").map(p => {
+                const [x, y] = p.split(",").map(Number);
+                return [x, y];
+            });
+
+            const allPoints = [];
+            for (let x = 1; x <= xRange; x++) {
+                for (let y = 1; y <= yRange; y++) {
+                    allPoints.push([x, y]);
+                }
+            }
+
+            const availablePoints = allPoints.filter(point => {
+                return !unavailablePoints.some(up => up[0] === point[0] && up[1] === point[1]);
+            });
+
+            if (availablePoints.length < 6) {
+                document.getElementById("output").innerText = "可用点位不足，无法生成。";
+                return;
+            }
+
+            const shuffled = availablePoints.sort(() => 0.5 - Math.random());
+            const selectedPoints = shuffled.slice(0, 6);
+
+            document.getElementById("output").innerText = "生成的点位: " + JSON.stringify(selectedPoints);
+        }
+    </script>
+</body>
+</html>

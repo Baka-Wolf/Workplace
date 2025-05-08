@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeepSleep - 探索已至之境</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f0f2f5;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    .header {
+      background-color: #4a76a8;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      font-size: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .chat-container {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      background-color: #fff;
+    }
+    .chat-bubble {
+      padding: 12px 18px;
+      border-radius: 20px;
+      max-width: 70%;
+      word-break: break-word;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      font-size: 16px;
+      line-height: 1.4;
+      position: relative;
+    }
+    .chat-bubble.user {
+      background-color: #d1e7dd;
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+    }
+    .chat-bubble.bot {
+      background-color: #e2e3e5;
+      align-self: flex-start;
+    }
+    .bot-text {
+      margin: 0;
+    }
+    .bot-actions {
+      margin-top: 10px;
+      text-align: right;
+    }
+    .bot-actions button {
+      margin-left: 5px;
+      padding: 5px 10px;
+      font-size: 14px;
+      border: none;
+      background-color: #4a76a8;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .input-container {
+      display: flex;
+      padding: 10px 20px;
+      border-top: 1px solid #ccc;
+      background-color: #f7f7f7;
+    }
+    .input-container input {
+      flex: 1;
+      padding: 10px 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      outline: none;
+      transition: border 0.3s;
+    }
+    .input-container input:focus {
+      border-color: #4a76a8;
+    }
+    .input-container button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #4a76a8;
+      color: #fff;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .input-container button:hover {
+      background-color: #3b5c85;
+    }
+    .action-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      background-color: #f7f7f7;
+      border-top: 1px solid #ccc;
+      justify-content: flex-start;
+    }
+    .action-button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #ddd;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 16px;
+    }
+    .action-button.active {
+      background-color: #4a76a8;
+      color: #fff;
+    }
+    /* 样式调整用户消息中图片显示 */
+    .chat-bubble.user img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">DeepSleep</div>
+  <div class="chat-container" id="chatContainer">
+    <!-- 消息记录区域 -->
+  </div>
+  <div class="input-container">
+    <input type="text" id="userInput" placeholder="请输入消息...">
+    <button onclick="sendMessage()">发送</button>
+  </div>
+  <div class="action-buttons">
+    <button class="action-button" id="attachButton" onclick="triggerFileInput()">+</button>
+    <button class="action-button" id="onlineButton" onclick="toggleActive(this)">
+      <span>🌐</span>
+      <span>联网搜索</span>
+    </button>
+    <button class="action-button" id="deepThinkButton" onclick="toggleActive(this)">
+      <span>💡</span>
+      <span>深度思考</span>
+    </button>
+  </div>
+  <!-- 隐藏的文件输入，仅用于图片附件 -->
+  <input type="file" id="fileInput" accept=".jpg,.jpeg,.png" style="display:none">
+
+  <script>
+    // 添加消息
+    function addUserMessage(content, isImage = false) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('chat-bubble', 'user');
+      if (isImage) {
+        const img = document.createElement('img');
+        img.src = content;
+        messageDiv.appendChild(img);
+      } else {
+        messageDiv.textContent = content;
+      }
+      document.getElementById('chatContainer').appendChild(messageDiv);
+      scrollToBottom();
+    }
+
+    // 添加DeepSleep的消息
+    function addBotMessage(text) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('chat-bubble', 'bot');
+
+      // 深度思考提示文本
+      const deepThinkBtn = document.getElementById('deepThinkButton');
+      if(deepThinkBtn.classList.contains('active')) {
+        const randomSec = Math.floor(Math.random() * 4); // 随机0-3秒
+        const deepTextDiv = document.createElement('div');
+        deepTextDiv.style.fontSize = '12px';
+        deepTextDiv.style.color = '#555';
+        deepTextDiv.style.textAlign = 'left';
+        deepTextDiv.style.marginBottom = '5px';
+        deepTextDiv.textContent = `已深度思考，持续${randomSec}秒`;
+        messageDiv.appendChild(deepTextDiv);
+      }
+      
+      // 消息文本
+      const textDiv = document.createElement('div');
+      textDiv.classList.add('bot-text');
+      textDiv.textContent = text;
+      messageDiv.appendChild(textDiv);
+      
+      // 重置 和 复制
+      const actionsDiv = document.createElement('div');
+      actionsDiv.classList.add('bot-actions');
+      
+      const resetBtn = document.createElement('button');
+      resetBtn.textContent = "🔄";
+      resetBtn.title = "重置";
+      resetBtn.onclick = function() {
+        resetBotMessage(messageDiv);
+      };
+      
+      const copyBtn = document.createElement('button');
+      copyBtn.textContent = "📋";
+      copyBtn.title = "复制";
+      copyBtn.onclick = function() {
+        copyBotMessage(textDiv.textContent);
+      };
+      
+      actionsDiv.appendChild(resetBtn);
+      actionsDiv.appendChild(copyBtn);
+      messageDiv.appendChild(actionsDiv);
+      
+      document.getElementById('chatContainer').appendChild(messageDiv);
+      scrollToBottom();
+    }
+
+    // 发送文本消息
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const userText = input.value.trim();
+      if (userText !== "") {
+        addUserMessage(userText);
+        input.value = "";
+        // 延时3秒后 AI 助手回复
+        setTimeout(() => {
+          addBotMessage('服务器繁忙，请稍后再试');
+        }, 3000);
+      }
+    }
+
+    // 为输入框绑定回车键事件
+    document.getElementById('userInput').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        sendMessage();
+      }
+    });
+
+    // 切换按钮的 active 样式
+    function toggleActive(button) {
+      button.classList.toggle('active');
+    }
+
+    // 触发文件选择框
+    function triggerFileInput() {
+      document.getElementById('fileInput').click();
+    }
+
+    // 处理文件选择（图片附件）
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file && (file.type === "image/jpeg" || file.type === "image/png")) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          // 将图片以用户消息的形式添加
+          addUserMessage(e.target.result, true);
+          // 延时3秒后DeepSleep回复
+          setTimeout(() => {
+            addBotMessage('服务器繁忙，请稍后再试');
+          }, 3000);
+        }
+        reader.readAsDataURL(file);
+      }
+      // 清空选择状态，便于再次选择相同文件
+      event.target.value = "";
+    });
+
+    // 重置当前DeepSleep消息
+    function resetBotMessage(messageDiv) {
+      // 移除当前消息
+      messageDiv.remove();
+      // 延时3秒重新输出回复
+      setTimeout(() => {
+        addBotMessage('服务器繁忙，请稍后再试');
+      }, 3000);
+    }
+
+    // 复制DeepSleep回复内容到剪贴板
+    function copyBotMessage(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert("已复制到剪贴板");
+      }).catch(err => {
+        alert("复制失败，请重试");
+      });
+    }
+    
+    // 滚动到底部
+    function scrollToBottom() {
+      const container = document.getElementById('chatContainer');
+      container.scrollTop = container.scrollHeight;
+    }
+  </script>
+</body>
+</html>

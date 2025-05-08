@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>俄罗斯轮盘赌</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>俄罗斯轮盘赌</h1>
+    <p id="status">点击按钮来扣动扳机...</p>
+    <button onclick="playGame()">扣动扳机</button>
+    <script>
+        let chambers = 6;
+        let bulletPosition = Math.floor(Math.random() * chambers) + 1;
+        
+        function playGame() {
+            let triggerPosition = Math.floor(Math.random() * chambers) + 1;
+            if (triggerPosition === bulletPosition) {
+                document.getElementById("status").innerText = "砰！你输了...";
+                document.querySelector("button").disabled = true;
+            } else {
+                document.getElementById("status").innerText = "咔哒！你活下来了！点击继续...";
+            }
+        }
+    </script>
+</body>
+</html>

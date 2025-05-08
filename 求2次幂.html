@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>最近的 2 的幂</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2em;
+    }
+    input, button {
+      font-size: 1em;
+      padding: 0.5em;
+      margin-right: 0.5em;
+    }
+    .output {
+      margin-top: 1em;
+      font-weight: bold;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+  <h1>查找最接近的 2 的幂</h1>
+  <p>输入一个非负数，程序会给出不小于它的最小 2 的幂和不大于它的最大 2 的幂。</p>
+  <input type="number" id="numberInput" placeholder="例如：37" min="0" step="any">
+  <button onclick="findPowers()">计算</button>
+
+  <div class="output" id="result"></div>
+
+  <script>
+    function findPowers() {
+      const val = document.getElementById('numberInput').value;
+      const n = parseFloat(val);
+      const out = document.getElementById('result');
+
+      // 输入校验
+      if (isNaN(n) || n < 0) {
+        out.textContent = '请输入一个有效的非负数字。';
+        return;
+      }
+      if (n === 0) {
+        out.textContent = '对于 0，最近的 2 的幂分别是 0（下界）和 1（上界）。';
+        return;
+      }
+
+      // 用 Math.log2 计算以 2 为底的对数，再用 floor/ceil 得到指数值
+      const log2 = Math.log2(n);  // :contentReference[oaicite:0]{index=0}
+      const lowerExp = Math.floor(log2);
+      const upperExp = Math.ceil(log2);
+
+      // 再取 2 的相应次方
+      const lowerPower = Math.pow(2, lowerExp);  // :contentReference[oaicite:1]{index=1}
+      const upperPower = Math.pow(2, upperExp);  // :contentReference[oaicite:2]{index=2}
+
+      // 输出结果
+      if (lowerPower === upperPower) {
+        out.textContent = `恰好是 2 的幂！下界和上界都为 ${lowerPower}。`;
+      } else {
+        out.textContent =
+          `最接近且不超过输入值的 2 的幂：${lowerPower} （2^${lowerExp}）\n` +
+          `最接近且不低于输入值的 2 的幂：${upperPower} （2^${upperExp}）`;
+      }
+    }
+  </script>
+</body>
+</html>
