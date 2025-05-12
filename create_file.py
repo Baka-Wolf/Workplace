@@ -6,8 +6,8 @@ import os
 def main():
     # 1. 选择生成选项
     choice = ''
-    while choice.lower() not in ('md', 'html'):
-        choice = input("请选择要生成的文件类型（md/html）：").strip()
+    while choice.lower() not in ('md', 'html','py'):
+        choice = input("请选择要生成的文件类型（md/html/py）：").strip()
     
     # 2. 输入名字
     name = ''
@@ -18,9 +18,12 @@ def main():
     if choice.lower() == 'md':
         folder = 'md'
         ext = '.md'
-    else:
+    elif choice.lower() == 'HTML':
         folder = 'HTML'
         ext = '.html'
+    else:
+        folder = 'py'
+        ext = '.py'
     
     # 4. 创建目录（如果不存在）
     os.makedirs(folder, exist_ok=True)
