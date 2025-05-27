@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时间线</title>
+  <!-- 引入 Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* 全局样式 */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #f2f2f2, #e6e6e6);
+      color: #333;
+      line-height: 1.6;
+    }
+    /* 顶部导航栏 */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      background-color: #1f2937;
+      color: #fff;
+      padding: 15px 30px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    .top-bar a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 22px;
+      font-weight: 700;
+      transition: color 0.3s;
+    }
+    .top-bar a:hover {
+      color: #f59e0b;
+    }
+    /* 主体内容区域 */
+    .content {
+      max-width: 900px;
+      margin: 100px auto 40px;
+      padding: 30px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    /* 标题样式 */
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #1f2937;
+    }
+    /* 时间线内容 */
+    p {
+      margin-bottom: 20px;
+    }
+    /* 返回链接 */
+    a.return-link {
+      text-decoration: none;
+      color: #2563eb;
+      transition: color 0.3s;
+    }
+    a.return-link:hover {
+      color: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+  <!-- 顶部导航栏 -->
+  <div class="top-bar">
+    <a href="../index.html">存续的图书馆</a>
+  </div>
+  
+  <!-- 主体内容 -->
+  <div class="content">
+    <h1>时间线</h1>
+    <p>
+      约公元前200万年：早期人类出现。<br>
+      约公元前10万年：智人从非洲扩散到其他地区。<br>
+      约公元前5万年：眸月抵达本宇宙。<br>
+      约公元前1万年：农业革命开始，人类从狩猎采集转向农业定居。神秘第一次落潮。<br>
+      <br>
+      约公元前6000年：神秘第一次复苏，术士阶层在早期国家崛起。<br>
+      约公元前3500年：美索不达米亚文明兴起，楔形文字的发明标志着历史记录的开始。<br>
+      约公元前3100年：古埃及统一。<br>
+      约公元前2700年：美索不达米亚文明灭亡，即第七分流点。<br>
+      约公元前2600年：印度河流域文明达到鼎盛。<br>
+      约公元前2000年：普罗米修斯盗火，把火种传给了人类，这些人被称为“隐火贤者”。<br>
+      约公元前1600年：古代中国商朝兴起，进入青铜时代。<br>
+      约公元前1200年：古希腊迈锡尼文明衰落，进入“黑暗时代”。<br>
+      <br>
+      约公元前509年：罗马共和国成立，拉开西方古典文明序幕。<br>
+      约公元前5世纪：孔子诞生，建立泗水书院。<br>
+      公元前4世纪：米埃扎学社原型建立。<br>
+      约公元前380年：柏拉图提出《理想国》，即第三分流点。<br>
+      约公元前323年：亚历山大大帝去世，其帝国分裂。<br>
+      公元前221年：秦始皇统一中国，建立中央集权的秦朝。<br>
+      公元1年：圣子诞生，神秘复苏。同年，神秘调查基金会原型建立。<br>
+      公元476年：西罗马帝国灭亡，标志着欧洲古典时代的结束。<br>
+      公元5世纪：亚瑟王身死，圆桌骑士团改组为圆桌监督协会。神秘第二次落潮。<br>
+      <br>
+      公元622年：伊斯兰教创立，阿拉伯帝国崛起，推动科学与文化繁荣。<br>
+      公元800年：查理大帝加冕，建立神圣罗马帝国。<br>
+      约公元1000年：维京人探索北美，欧洲开始远洋探险。<br>
+      公元1206年：成吉思汗建立蒙古帝国，即第二分流点。<br>
+      公元1215年：英国签署《大宪章》，限制王权，奠定现代宪政基础。<br>
+      公元14世纪：黑死病席卷欧洲，约三分之一人口死亡。<br>
+      公元15世纪：柴薪学者会建立。<br>
+      <br>
+      公元1468年：《女巫之锤》出版，猎巫行动开始，巴别塔在这个时代建立。<br>
+      公元1492年：哥伦布到达美洲，开启新大陆时代。<br>
+      公元1517年：马丁·路德发表《论三位一体》。<br>
+      公元1521年：新大陆在与殖民者的战争中落败，即第五分流点。<br>
+      公元1644年：清朝建立，中国进入最后一个封建王朝。<br>
+      公元1776年：美国独立战争爆发。<br>
+      <br>
+      公元1789年：法国大革命爆发，现代国家体系和人权思想逐步形成。<br>
+      公元19世纪：工业革命推动全球化，蒸汽机和铁路改变世界。同时神秘第三次落潮，炼金术等法术被证伪更是严重打击了神秘侧的发展，皇家理工学院神秘科应运而生。<br>
+      公元1815年：反法联盟在滑铁卢大败拿破仑，即第一分流点。<br>
+      公元1899年：“恒辉之夜”，起因为狮子座流星雨，恒辉观测团建立。<br>
+      公元1914年：第一次世界大战爆发，传统帝国体系瓦解。<br>
+      公元1925年：洛夫克拉夫特发表第一篇成熟的小说，即第六分流点。<br>
+      公元1945年：第二次世界大战结束，联合国成立，世界进入冷战格局。<br>
+      公元1969年：阿波罗六号坠毁在月球上，自此以后人类的足迹再没有涉及月球。<br>
+      公元1991年：苏联解体，冷战结束，美国成为唯一超级大国。同年，日本的经济泡沫破裂，即第四分流点。<br>
+      公元1998年：第一前线学院成立。<br>
+      公元21世纪初：神秘第三次复苏。<br>
+      <br>
+      某时，某刻：Type:Moon被Type:Earth击败。<br>
+      <br>
+      与现实历史不同的点：<br>
+      公元1517年：现实是马丁·路德进行了宗教改革，挑战传统天主教的权威。<br>
+      公元1521年：现实的新大陆没有联合起来对抗殖民者。<br>
+      公元1899年：狮子座流星雨并没有达到预期的程度。<br>
+      公元1969年：现实的人类成功登月。
+    </p>
+    
+    <p><a class="return-link" href="../index.html">返回主页</a></p>
+  </div>
+</body>
+</html>

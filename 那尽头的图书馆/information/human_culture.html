@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人文设定</title>
+  <!-- 引入 Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* 全局样式 */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #f2f2f2, #e6e6e6);
+      color: #333;
+    }
+    /* 顶部导航栏 */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      background-color: #1f2937;
+      color: #fff;
+      padding: 15px 30px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    .top-bar a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 22px;
+      font-weight: 700;
+      transition: color 0.3s;
+    }
+    .top-bar a:hover {
+      color: #f59e0b;
+    }
+    /* 主体内容区域 */
+    .content {
+      max-width: 800px;
+      margin: 100px auto 40px;
+      padding: 30px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    /* 标题样式 */
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #1f2937;
+    }
+    /* 列表样式 */
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+    ul li {
+      margin-bottom: 10px;
+    }
+    ul li a {
+      text-decoration: none;
+      color: #2563eb;
+      transition: color 0.3s;
+    }
+    ul li a:hover {
+      color: #1d4ed8;
+    }
+    /* 返回链接 */
+    p a {
+      text-decoration: none;
+      color: #2563eb;
+      transition: color 0.3s;
+    }
+    p a:hover {
+      color: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+  <!-- 顶部导航栏 -->
+  <div class="top-bar">
+    <a href="../index.html">存续的图书馆</a>
+  </div>
+  
+  <!-- 主体内容区域 -->
+  <div class="content">
+    <h1>人文设定</h1>
+    <ul>
+      <li><a href="human_culture/organization.html">组织设定</a></li>
+      <li><a href="human_culture/characters.html">人物设定</a></li>
+      <li><a href="human_culture/servants.html">从者档案</a></li>
+    </ul>
+    <p><a href="../index.html">返回主页</a></p>
+  </div>
+</body>
+</html>
